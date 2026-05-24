@@ -200,6 +200,12 @@ epoch,train_loss,train_accuracy,mean_angle_degrees,layer_1_angle_degrees,layer_2
 
 ## 📈 趋势图解读
 
+示例趋势图：
+
+![BP vs biological-rule weight-change angle trend](assets/angle_trend_example.png)
+
+这张示例图来自一次 20 epoch 实验。可以看到平均夹角从较高值逐步下降到较低值，说明在该设置下，生物规则产生的权重更新方向逐渐接近 BP 更新方向。
+
 趋势图中通常有两类线：
 
 | 曲线 | 含义 |

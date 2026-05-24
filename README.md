@@ -80,7 +80,7 @@ Delta W_l = -eta * f(epsilon_l, y_l) * y_(l-1)^T
 cd ~/IPARA/3-RESOURCES/emacs/config/github/Triplet_STDP_CV2_Learning
 ```
 
-运行快速检查：
+可选：先运行一次快速自检，确认依赖、测试和训练入口都正常：
 
 ```bash
 ./scripts/run_experiment.sh --smoke
@@ -94,7 +94,7 @@ cd ~/IPARA/3-RESOURCES/emacs/config/github/Triplet_STDP_CV2_Learning
 4. 用 64 个 MNIST 样本跑 1 个 epoch
 5. 生成 CSV 和趋势图
 
-输出文件：
+快速自检输出文件：
 
 ```text
 outputs/smoke_metrics.csv
@@ -262,6 +262,12 @@ Triplet_STDP_CV2_Learning/
 
 ## 📊 结果解读
 
+示例趋势图：
+
+![BP vs biological-rule weight-change angle trend](docs/assets/angle_trend_example.png)
+
+这张图展示了一次 20 epoch 实验中，BP 与生物规则产生的权重更新向量平均夹角随训练逐渐下降。它用于说明项目输出的图表形态；不同随机种子、训练规则和参数设置会得到不同曲线。
+
 CSV 中最重要的列：
 
 | 列名 | 含义 |
@@ -289,18 +295,3 @@ CSV 中最重要的列：
 - 📄 [原始需求](Coding_prompt.tex)
 
 ---
-
-## ✅ 当前验证
-
-最近一次 smoke run 验证链路：
-
-```bash
-./scripts/run_experiment.sh --smoke
-```
-
-已验证内容：
-
-- 依赖版本可导入
-- 单元测试通过
-- 默认 3 层、每层 500 神经元网络可以完成小样本训练
-- CSV 和趋势图可以正常生成
