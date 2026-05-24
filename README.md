@@ -283,6 +283,7 @@ CSV 中最重要的列：
 
 ## 🧾 文档导航
 
+- 🌟 [费曼式介绍](docs/feynman_intro.md)
 - 📐 [算法实现说明](docs/algorithm_details.md)
 - 🧪 [实验指南](docs/experiment_guide.md)
 - 📄 [原始需求](Coding_prompt.tex)

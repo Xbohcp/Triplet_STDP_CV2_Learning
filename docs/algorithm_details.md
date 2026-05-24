@@ -409,5 +409,6 @@ flowchart TD
 ## 🔗 相关文档
 
 - [README](../README.md)
+- [费曼式介绍](feynman_intro.md)
 - [实验指南](experiment_guide.md)
 - [原始需求](../Coding_prompt.tex)

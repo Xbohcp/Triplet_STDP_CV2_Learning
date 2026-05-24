@@ -323,5 +323,6 @@ epochs: 20
 ## 🔗 相关文档
 
 - [README](../README.md)
+- [费曼式介绍](feynman_intro.md)
 - [算法实现说明](algorithm_details.md)
 - [原始需求](../Coding_prompt.tex)
