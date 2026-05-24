@@ -1,0 +1,53 @@
+%% LyX 2.5.1 created this file.  For more info, see https://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\author{Bo Wang}
+\date{}
+
+\makeatother
+
+\usepackage[style=numeric,sorting=none,sortcites=true]{biblatex}
+\begin{document}
+
+\section{训练算法介绍}
+
+我从神经科学的和模型出发得到了一个具有生物合理性的向后传播误差信号的等效过程以及依据这个误差信号更新连接权重的具有生物合理性的学习规则。现在我想要检验这个传播误差的过程和学习规则在深度学习中的效果。
+
+在传统的深度学习中，向前传播的过程是
+\[
+y_{\left(l+1\right)}=\sigma\left(x_{\left(l+1\right)}+b_{\left(l+1\right)}\right)=\sigma\left(W_{\left(l+1\right)}y_{\left(l\right)}+b_{\left(l+1\right)}\right)
+\]
+向后传播误差信号则是基于下面的公式
+\begin{align*}
+\varepsilon_{\left(l\right)} & =\sigma^{\prime}\left(x_{\left(l\right)}\right)\odot\left(W^{T}_{\left(l+1\right)}\varepsilon_{\left(l+1\right)}\right)
+\end{align*}
+，然后更新权重则是依据
+\[
+\Delta W_{\left(l\right)}=-\eta\varepsilon_{\left(l\right)}y^{T}_{\left(l-1\right)}
+\]
+在我的模型中，向前传播的过程中激活函数的值局限在正值范围（可以通过调整激活函数$\sigma$实现），向后传播误差的过程则改成了
+\[
+\varepsilon_{\left(l\right)}=\zeta\left(y^{-1}_{\left(l\right)}\odot\sigma^{\prime}\left(x_{\left(l\right)}\right)\odot\left(W^{T}_{\left(l+1\right)}\left(y_{\left(l+1\right)}\odot\varepsilon_{\left(l+1\right)}\right)\right)\right)
+\]
+这里的$\zeta$是一个截断或非线性放缩函数，用于将值局限在$\left(-\frac{1}{2},\frac{1}{2}\right)$内。然后更新权重的法则也变成了
+\[
+\Delta W_{\left(l\right)}=-\eta f\left(\varepsilon_{\left(l\right)},y_{\left(l\right)}\right)\odot y^{T}_{\left(l-1\right)}
+\]
+其中$f\left(\varepsilon_{\left(l\right)},y_{\left(l\right)}\right)$是一个多元函数，其输出结果和$\varepsilon_{\left(l\right)}$的大小一样。例如它可以是$f\left(\varepsilon_{\left(l\right)},y_{\left(l\right)}\right)=\varepsilon_{\left(l\right)}\odot y_{\left(l\right)}$，那么它除了截断函数$\zeta$就和原来的更新规则没有区别了。
+
+\section{代码要求}
+\begin{enumerate}
+\item 平台：PyTorch
+\item 数据集：MNIST
+\item 神经网络大小：3个隐藏层，每层500神经元
+\item 对比目的：对比两种学习算法产生的权重变化向量的平均夹角随训练epoch数增加的变化趋势图
+\end{enumerate}
+
+\end{document}
